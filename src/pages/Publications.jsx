@@ -404,6 +404,12 @@ const reports = [
     summary: 'UN Ocean Conference, Nice 2025',
     link: '/Report5.pdf',
   },
+  {
+    id: 'r6',
+    title: 'DMUN Annual Meetings 2024',
+    summary: 'Online,July 10th 2024',
+    link: '/Report6.pdf',
+  },
   
 ];
 
