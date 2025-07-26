@@ -240,6 +240,20 @@ const PublicationDate = styled.p`
 const statements = 
     [
       {
+        id: 's-6',
+        image: null,
+        title: 'Intervention SDG 6 Water Action Agenda: High-level Launch of the SDG 6 Country Acceleration Case Studies',
+        date: '22nd July, 2025',
+        link: '/Statement-6.pdf',
+      },
+      {
+        id: 's-5',
+        image: null,
+        title: 'Intervention Interactive Multistakeholder Hearing on the 30th Anniversary of the Beijing Declaration and Platform for Action',
+        date: '18th July, 2025',
+        link: '/Statement-5.pdf',
+      },
+      {
         id: 's-4',
         image: null,
         title: 'Intervention 2025 Sustainability Forum DMUN Foundation Jaewon Choi Executive Director DMUN Foundation CHECK AGAINST DELIVERY SEUL LE TEXTE PRONONCÉ FAIT FOI',
