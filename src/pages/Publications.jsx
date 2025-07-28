@@ -424,6 +424,12 @@ const reports = [
     summary: 'Online,July 10th 2024',
     link: '/Report6.pdf',
   },
+  {
+    id: 'r7',
+    title: 'DMUN Outcome Report: High-Level Political Forum 2025',
+    summary: 'July 2025',
+    link: '/Report7.pdf',
+  },
   
 ];
 
