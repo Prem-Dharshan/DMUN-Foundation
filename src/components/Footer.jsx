@@ -301,6 +301,9 @@ const Footer = () => (
             <SocialIcon as="a" href="https://www.linkedin.com/company/dmun-foundation/" target="_blank" rel="noopener noreferrer">
               <img src="/linkedin-icon.png" alt="LinkedIn" />
             </SocialIcon>
+            <SocialIcon as="a" href="https://www.youtube.com/@dmunfoundation" target="_blank" rel="noopener noreferrer">
+              <img src="/Youtube-icon.png" alt="Youtube" />
+            </SocialIcon>
           </Socials>
         </div>
       </MainFooterGrid>
