@@ -430,7 +430,12 @@ const reports = [
     summary: 'July 2025',
     link: '/Report7.pdf',
   },
-  
+  {
+    id: 'r8',
+    title: 'Commitments + Children and Youth Positions',
+    summary: 'August 2025',
+    link: '/Report8.pdf',
+  },
 ];
 
 const Publications = () => {
