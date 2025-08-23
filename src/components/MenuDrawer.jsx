@@ -8,6 +8,7 @@ const slideIn = keyframes`
 `;
 
 const DARK_BLUE = '#002147';
+const ABBOT_BLUE = '#44b8f3';
 const SUBNAV_GRAY_TEXT = '#555';
 
 const Overlay = styled.div`
@@ -20,72 +21,40 @@ const Overlay = styled.div`
   display: ${({ open }) => (open ? 'flex' : 'none')};
   animation: ${slideIn} 0.4s cubic-bezier(0.4,0,0.2,1);
   font-family: var(--andover-font-serif);
-  flex-direction: row;
+  background: var(--andover-blue);
+  color: ${DARK_BLUE};
   overflow-y: auto;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    max-height: 100vh;
-  }
-`;
-
-const MenuImagePanel = styled.div`
-  width: 30vw;
-  height: 100vh;
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const MenuContent = styled.div`
-  flex: 1;
-  background: var(--andover-blue);
-  color: ${DARK_BLUE};
+  width: 100%;
+  padding: 4rem 5vw;
+  max-width: 1600px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 4.5rem 2rem 2rem 2rem;
-  min-width: 500px;
-  overflow-y: auto;
-  max-height: 100vh;
+  gap: 3rem;
 
   @media (max-width: 768px) {
-    min-width: unset;
-    padding: 2rem;
-    max-height: 100vh;
+    padding: 2rem 3vw;
+    gap: 2rem;
   }
 `;
 
-const CloseRow = styled.div`
-  width: 100%;
+const HeaderSection = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-end;
-  gap: 2.5rem;
+  margin-bottom: 2rem;
 `;
 
-const CaretIcon = styled.span`
-  display: inline-block;
-  font-size: 1.1rem;
-  margin-left: 0.3em;
-  vertical-align: middle;
-
-  svg {
-    width: 1.2rem;
-    height: auto;
-    vertical-align: middle;
-    stroke: ${SUBNAV_GRAY_TEXT};
-    transform: translateY(-1px);
-  }
+const InstitutionName = styled.h1`
+  font-family: var(--andover-font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: ${DARK_BLUE};
+  margin: 0;
+  text-transform: uppercase;
 `;
 
 const CloseBtn = styled.button`
@@ -97,111 +66,172 @@ const CloseBtn = styled.button`
   font-weight: 600;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  letter-spacing: 0.01em;
-
-  ${CaretIcon} {
-    margin-right: 0.5rem;
-  }
-`;
-
-const CloseArrow = styled.span`
-  font-size: 1.2rem;
-  margin-right: 0.3rem;
-`;
-
-const SearchRow = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 2rem;
-  flex: 1;
-`;
-
-const SearchIcon = styled.span`
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
-`;
-
-const Search = styled.input`
-  border: none;
-  border-bottom: 1px solid ${DARK_BLUE};
-  background: transparent;
-  color: ${DARK_BLUE};
-  font-size: 1.1rem;
-  padding: 0.3rem 0.5rem;
-  outline: none;
-  width: 240px;
-
-  &::placeholder { 
-    color: ${DARK_BLUE}; 
-    opacity: 0.8; 
-  }
-`;
-
-const MainLinks = styled.div`
-  margin: 6rem 0 2.5rem 0;
-  display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  padding-left: 36px;
-`;
-
-const MainLink = styled(Link)`
-  font-family: var(--andover-font-serif);
-  font-size: 2.8rem;
-  color: ${DARK_BLUE};
-  margin-bottom: 2.5rem;
-  text-decoration: none;
-  font-weight: 400;
+  align-items: center;
   letter-spacing: 0.01em;
-
-  &:hover { 
-    text-decoration: underline;
-    color: ${DARK_BLUE};
-  }
-`;
-
-const BottomLinks = styled.div`
-  margin-top: auto;
-  width: 100%;
-  border-top: 1px dotted #fff8;
-  padding-top: 2.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
-  font-size: 1.2rem;
-`;
-
-const BottomCol = styled.div`
-  flex: 1 1 200px;
-  min-width: 200px;
-`;
-
-const BottomLink = styled(Link)`
-  display: block;
-  color: ${DARK_BLUE};
-  margin-bottom: 1rem;
-  text-decoration: none;
-  font-weight: 400;
-
-  &:hover { 
-    text-decoration: underline;
-    color: ${DARK_BLUE};
-  }
-`;
-
-const BottomRouterLink = styled(Link)`
-  display: block;
-  color: ${DARK_BLUE};
-  margin-bottom: 1rem;
-  text-decoration: none;
-  font-weight: 400;
+  transition: color 0.2s ease;
 
   &:hover {
-    text-decoration: underline;
     color: ${DARK_BLUE};
   }
+`;
+
+const XIcon = styled.span`
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 0.2rem;
+`;
+
+const ActionButtons = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
+`;
+
+const ActionButton = styled(Link)`
+  border: 1px solid ${DARK_BLUE};
+  background: none;
+  color: ${DARK_BLUE};
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.5rem;
+  font-family: var(--andover-font-serif);
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  text-align: center;
+
+  &:hover {
+    background: ${DARK_BLUE};
+    color: var(--andover-blue);
+  }
+    @media (max-width: 768px) {
+  font-size: 1.2rem;
+  padding: 0.6rem 1.2rem;
+}
+`;
+
+const MegaMenuGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+`;
+
+const MenuSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+`;
+
+const SectionTitle = styled.h3`
+  font-family: var(--andover-font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: ${DARK_BLUE};
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+`;
+
+const MenuLink = styled(Link)`
+  font-family: var(--andover-font-serif);
+  font-size: 2.5rem;
+  color: ${DARK_BLUE};
+  text-decoration: none;
+  font-weight: 400;
+  padding: 0.3rem 0;
+  line-height: 1.4;
+
+  &:hover { 
+    color: ${DARK_BLUE};
+    text-decoration: underline;
+  }
+    @media (max-width: 768px) {
+  font-size: 1.8rem; /* for MenuLink */
+}
+  @media (max-width: 480px) {
+  font-size: 1.4rem; /* for MenuLink */
+}
+
+`;
+
+const BottomSection = styled.div`
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+`;
+
+const ContactInfo = styled.div`
+  color: ${DARK_BLUE};
+  font-family: var(--andover-font-sans);
+  font-size: 0.9rem;
+  line-height: 1.6;
+
+  @media (max-width: 480px) {
+  font-size: 0.8rem;
+  word-break: break-word;
+}
+`;
+
+const Socials = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
+
+const SocialIcon = styled.span`
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background: transparent;
+  border-radius: 50%;
+  color: ${DARK_BLUE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: ${ABBOT_BLUE};
+  }
+
+  img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+@media (max-width: 480px) {
+  width: 32px;
+  height: 32px;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
 `;
 
 const ArrowIcon = () => (
@@ -212,60 +242,71 @@ const ArrowIcon = () => (
 
 const MenuDrawer = ({ open, onClose }) => {
   const navigate = useNavigate();
-  const [searchValue, setSearchValue] = React.useState('');
-
-  const handleSearchKeyDown = (e) => {
-    if (e.key === 'Enter' && searchValue.trim()) {
-      navigate(`/newsroom?search=${encodeURIComponent(searchValue.trim())}`);
-      onClose();
-    }
-  };
 
   return (
     <Overlay open={open}>
-      <MenuImagePanel aria-hidden="true">
-        <img src="/Home-page-Header-Image.png" alt="Decorative image for menu" />
-      </MenuImagePanel>
       <MenuContent>
-        <CloseRow>
+        <HeaderSection>
+          <InstitutionName>DMUN Foundation</InstitutionName>
           <CloseBtn onClick={onClose}>
-            <CaretIcon><ArrowIcon /></CaretIcon>Close
+            <XIcon>✕</XIcon>
+            Close
           </CloseBtn>
-          <SearchRow>
-            <Search
-              placeholder="What are you looking for?"
-              value={searchValue}
-              onChange={e => setSearchValue(e.target.value)}
-              onKeyDown={handleSearchKeyDown}
-            />
-          </SearchRow>
-        </CloseRow>
+        </HeaderSection>
 
-        <MainLinks>
-          <MainLink to="/" onClick={onClose}>Home</MainLink>
-          <MainLink to="/about" onClick={onClose}>About</MainLink>
-          <MainLink to="/programs" onClick={onClose}>Programs</MainLink>
-          <MainLink to="/advocacy" onClick={onClose}>Advocacy</MainLink>   
-          <MainLink to="/research" onClick={onClose}>Research</MainLink>
-        </MainLinks>
+        <ActionButtons>
+          <ActionButton to="/volunteer" onClick={onClose}>Volunteer</ActionButton>
+          <ActionButton to="/donate" onClick={onClose}>Donate</ActionButton>
+          <ActionButton to="/partner" onClick={onClose}>Partner With Us</ActionButton>
+          <ActionButton to="/about" onClick={onClose}>Contact Us</ActionButton>
+        </ActionButtons>
 
-        <BottomLinks>
-          <BottomCol>
-            <BottomLink to="/integrity" onClick={onClose}>Integrity</BottomLink>
-            <BottomLink to="/take-action" onClick={onClose}>Take Action</BottomLink>
-            <BottomLink to="/newsroom" onClick={onClose}>Newsroom</BottomLink>
-          </BottomCol>
-          <BottomCol>
-            <BottomLink to="/donate" onClick={onClose}>Donate</BottomLink>
-            <BottomLink to="/volunteer" onClick={onClose}>Volunteer</BottomLink>
-            <BottomLink to="/partner" onClick={onClose}>Partner</BottomLink>
-          </BottomCol>
-          <BottomCol>
-            <BottomLink to="/donor-relations" onClick={onClose}>Donor Relations</BottomLink>
-            <BottomLink to="/mandate" onClick={onClose}>Our Mission</BottomLink>
-            <BottomLink to="/membership" onClick={onClose}>Membership</BottomLink>
-          </BottomCol>
-        </BottomLinks>
+        <MegaMenuGrid>
+          <MenuSection>
+            <MenuLink to="/" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Home</MenuLink>
+            <MenuLink to="/about" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>About</MenuLink>
+            <MenuLink to="/programs" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Programs</MenuLink>
+            <MenuLink to="/advocacy" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Advocacy</MenuLink>
+            <MenuLink to="/research" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Research</MenuLink>
+          </MenuSection>
+
+          <MenuSection>
+            <MenuLink to="/integrity" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Integrity</MenuLink>
+            <MenuLink to="/take-action" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Take Action</MenuLink>
+            <MenuLink to="/newsroom" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Newsroom</MenuLink>
+            <MenuLink to="/donate" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Donate</MenuLink>
+            <MenuLink to="/volunteer" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Volunteer</MenuLink>
+          </MenuSection>
+
+          <MenuSection>
+            <MenuLink to="/partner" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Partner</MenuLink>
+            <MenuLink to="/donor-relations" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Donor Relations</MenuLink>
+            <MenuLink to="/mandate" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Our Mission</MenuLink>
+            <MenuLink to="/membership" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Membership</MenuLink>
+            <MenuLink to="/publications" onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); onClose(); }}>Publications</MenuLink>
+          </MenuSection>
+        </MegaMenuGrid>
+
+        <BottomSection>
+          <ContactInfo>
+            <div>DMUN Foundation</div>
+            <div>4th Floor, 12 Gangnamdaero 156-gil, Seoul, Republic of Korea 06035</div>
+            <div>Unit 1814, 50 Causeway St., Boston, MA, USA 02114</div>
+            <div>enquiries@dmun.org</div>
+            <div>+1 (339) 927 8826 | +82 10 5696 8302</div>
+          </ContactInfo>
+          <Socials>
+            <SocialIcon as="a" href="https://www.instagram.com/discovermun/" target="_blank" rel="noopener noreferrer">
+              <img src="/instagram-icon.png" alt="Instagram" />
+            </SocialIcon>
+            <SocialIcon as="a" href="https://www.linkedin.com/company/dmun-foundation/" target="_blank" rel="noopener noreferrer">
+              <img src="/linkedin-icon.png" alt="LinkedIn" />
+            </SocialIcon>
+            <SocialIcon as="a" href="https://www.youtube.com/@dmunfoundation" target="_blank" rel="noopener noreferrer">
+              <img src="/Youtube-icon.png" alt="YouTube" />
+            </SocialIcon>
+          </Socials>
+        </BottomSection>
       </MenuContent>
     </Overlay>
   );

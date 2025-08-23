@@ -43,8 +43,8 @@ const MainContentFrame = styled.div`
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  border-left: 17px solid ${ABBOT_BLUE};
-  border-right: 17px solid ${ABBOT_BLUE};
+  border-left: 0;
+  border-right: 0;
   box-sizing: border-box;
   /* overflow: hidden; */ /* Temporarily removed to diagnose folder visibility */
   background-color: white;
@@ -69,8 +69,9 @@ const ContentWrapper = styled.div`
 const HeroWrapper = styled.section`
   position: relative;
   width: 100%;
-  height: calc(100vh - 70px);
-  min-height: 40rem;
+  height: calc(100vh + 70px);
+  min-height: calc(100vh + 70px);
+  margin-top: -70px;
   background: url('/hero-home.jpeg') center/cover no-repeat;
   background-size: cover;
   display: flex;
@@ -85,7 +86,7 @@ const HeroWrapper = styled.section`
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.41);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 2;
     pointer-events: none;
   }
@@ -94,16 +95,15 @@ const HeroWrapper = styled.section`
     position: relative;
     z-index: 3;
   }
+
   @media (max-width: 768px) {
-    min-height: 120px;
-    height: 120px;
-    max-height: 120px;
+    min-height: calc(100vh + 70px);
+    height: calc(100vh + 70px);
     padding: 0;
     align-items: center;
     justify-content: center;
     background-position: center center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-size: cover;
     text-align: center;
     h1, h2, h3, h4, h5, h6, p, span, div {
       text-align: center !important;

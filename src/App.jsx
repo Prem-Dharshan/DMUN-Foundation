@@ -41,7 +41,7 @@ function App() {
   return (
     <Router>
       <GlobalStyle />
-      <Header onMenuClick={() => setMenuOpen(true)} />
+      {!menuOpen && <Header onMenuClick={() => setMenuOpen(true)} />}
       <MenuDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
       <main className="main-content">
         <Routes>
