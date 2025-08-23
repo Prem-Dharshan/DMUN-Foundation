@@ -23,7 +23,8 @@ const Overlay = styled.div`
   font-family: var(--andover-font-serif);
   background: var(--andover-blue);
   color: ${DARK_BLUE};
-  overflow-y: auto;
+  overflow-y: hidden; /* prevent double scroll */
+  flex-direction: column; /* so children can flex */
 `;
 
 const MenuContent = styled.div`
@@ -34,6 +35,9 @@ const MenuContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  flex: 1; /* take all available height */
+  overflow-y: auto; /* scrolling happens here */
+  -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
 
   @media (max-width: 768px) {
     padding: 2rem 3vw;
