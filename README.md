@@ -7,6 +7,8 @@ A modern, responsive website for the DMUN Foundation built with React, featuring
 - **Framework:** React 19.1.0
 - **Build Tool:** Vite 6.3.5
 - **Routing:** React Router DOM 7.6.2
+- **Authentication:** Supabase Auth (Magic Links)
+- **Database:** Supabase PostgreSQL
 - **Styling:**
   - Tailwind CSS 3.4.18
   - Styled Components 6.1.18
@@ -21,6 +23,8 @@ A modern, responsive website for the DMUN Foundation built with React, featuring
 
 ## 📋 Features
 
+### Public Website
+
 - **Multi-page Navigation:** Home, About, Advocacy, Programs, Research, Publications, Newsroom, and more
 - **Interactive Components:** Tilted cards, split text animations, menu drawer
 - **Responsive Design:** Mobile-first approach with Tailwind CSS
@@ -33,6 +37,28 @@ A modern, responsive website for the DMUN Foundation built with React, featuring
   - Donor relations and donation pages
 - **Smooth Animations:** Page transitions and interactive elements using Framer Motion
 - **Accessible UI:** Built with Radix UI primitives for accessibility
+
+### 🔐 Executive Portal (New!)
+
+- **Secure Authentication:** Passwordless magic link login with @dmun.org email restriction
+- **Role-Based Access Control (RBAC):**
+  - **Lead (Founder):** Full administrative control
+  - **Co-Lead (Deputy Director):** Messaging and communication privileges
+  - **General Users:** View and respond to messages
+- **User Management:** Add/remove users, assign roles, reassign Co-Lead position
+- **Messaging System:** Send announcements, alerts, and task assignments to team
+- **Response Tracking:** Yes/No/Maybe/Discussion Needed response options with analytics
+- **Real-time Dashboard:** View all messages, send responses, role-specific actions
+- **Supabase Backend:** PostgreSQL database with row-level security
+
+**Executive Portal Routes:**
+
+- `/executives/login` - Secure login page
+- `/executives/dashboard` - Main dashboard for all users
+- `/executives/admin` - Admin panel (Lead only)
+- `/executives/messaging` - Messaging interface (Co-Lead only)
+
+**See [EXECUTIVE_PORTAL_SETUP.md](EXECUTIVE_PORTAL_SETUP.md) for complete setup instructions.**
 
 ## 🛠️ Installation
 
@@ -49,14 +75,32 @@ A modern, responsive website for the DMUN Foundation built with React, featuring
    npm install
    ```
 
-3. **Start the development server:**
+3. **Set up environment variables (for Executive Portal):**
+
+   ```bash
+   cp .env.example .env
+   # Edit .env and add your Supabase credentials
+   ```
+
+4. **Start the development server:**
 
    ```bash
    npm run dev
    ```
 
-4. **Open your browser:**
+5. **Open your browser:**
    Navigate to `http://localhost:5173` (or the port shown in your terminal)
+
+### Executive Portal Setup
+
+For the Executive Portal feature, additional setup is required:
+
+1. **Create a Supabase project** at [supabase.com](https://supabase.com)
+2. **Run the database schema** from `database/schema.sql` in the Supabase SQL Editor
+3. **Configure environment variables** in `.env` with your Supabase credentials
+4. **Update initial user emails** in the database to match your team
+
+**See [EXECUTIVE_PORTAL_SETUP.md](EXECUTIVE_PORTAL_SETUP.md) for detailed instructions.**
 
 ## 📦 Available Scripts
 
@@ -70,6 +114,11 @@ A modern, responsive website for the DMUN Foundation built with React, featuring
 ```
 DMUN-Foundation/
 ├── public/               # Static assets
+├── database/            # Database schemas and migrations
+│   └── schema.sql       # Supabase database schema
+├── data/                # Configuration and data files
+│   ├── rbac.json       # Role-based access control config
+│   └── users.json      # User data cache
 ├── src/
 │   ├── assets/          # Images, fonts, and other assets
 │   ├── components/      # Reusable React components
@@ -78,7 +127,18 @@ DMUN-Foundation/
 │   │   ├── Footer.jsx
 │   │   ├── MenuDrawer.jsx
 │   │   └── ...
-│   ├── pages/          # Page components
+│   ├── executives/      # Executive Portal (NEW!)
+│   │   ├── components/ # Portal-specific components
+│   │   │   └── ProtectedRoute.jsx
+│   │   ├── context/    # Authentication context
+│   │   │   └── ExecutiveAuthContext.jsx
+│   │   ├── pages/      # Portal pages
+│   │   │   ├── ExecutiveLogin.jsx
+│   │   │   ├── ExecutiveDashboard.jsx
+│   │   │   ├── AdminPanel.jsx
+│   │   │   └── CoLeadMessaging.jsx
+│   │   └── README.md   # Portal documentation
+│   ├── pages/          # Public page components
 │   │   ├── Home.jsx
 │   │   ├── About.jsx
 │   │   ├── Advocacy.jsx
@@ -87,13 +147,22 @@ DMUN-Foundation/
 │   │   ├── Newsroom.jsx
 │   │   └── ...
 │   ├── lib/            # Utility functions
+│   │   ├── utils.js
+│   │   └── supabase.js # Supabase client config
 │   ├── styles/         # Style configurations
 │   ├── App.jsx         # Main application component
 │   └── main.jsx        # Application entry point
+├── .env.example         # Environment variables template
 ├── components.json     # shadcn/ui configuration
 ├── tailwind.config.js  # Tailwind CSS configuration
 ├── vite.config.js      # Vite configuration
-└── package.json        # Project dependencies
+├── package.json        # Project dependencies
+├── EXECUTIVE_PORTAL_SETUP.md      # Portal setup guide
+├── EXECUTIVE_PORTAL_QUICKREF.md   # Quick reference
+├── ARCHITECTURE.md                # System architecture
+├── UI_UX_GUIDE.md                # Design system guide
+├── DEPLOYMENT_CHECKLIST.md        # Deployment checklist
+└── IMPLEMENTATION_SUMMARY.md      # Feature summary
 ```
 
 ## 🎨 Styling
@@ -123,6 +192,8 @@ The project uses a combination of:
 
 The application uses React Router for client-side routing with the following main routes:
 
+### Public Routes
+
 - `/` - Home page
 - `/about` - About the foundation
 - `/advocacy` - Advocacy initiatives
@@ -136,7 +207,16 @@ The application uses React Router for client-side routing with the following mai
 - `/volunteer` - Volunteer opportunities
 - `/partner` - Partnership opportunities
 
+### Executive Portal Routes (Protected)
+
+- `/executives/login` - Secure login with @dmun.org validation
+- `/executives/dashboard` - Main dashboard (all authenticated users)
+- `/executives/admin` - Admin panel (Lead only)
+- `/executives/messaging` - Messaging interface (Co-Lead only)
+
 ## 🚢 Deployment
+
+### Public Website
 
 The project includes a `vercel.json` configuration file for easy deployment on Vercel:
 
@@ -147,6 +227,18 @@ npm install -g vercel
 # Deploy to Vercel
 vercel
 ```
+
+### Executive Portal
+
+Additional steps required for Executive Portal deployment:
+
+1. Set up Supabase project and database
+2. Configure production environment variables
+3. Update Supabase redirect URLs for production
+4. Deploy application
+5. Test authentication flow
+
+**See [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) for complete deployment guide.**
 
 ## 🤝 Contributing
 

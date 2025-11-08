@@ -1,0 +1,55 @@
+{
+  "roles": {
+    "lead": {
+      "name": "Lead",
+      "permissions": [
+        "view_messages",
+        "send_messages",
+        "add_user",
+        "remove_user",
+        "edit_user",
+        "assign_colead",
+        "revoke_colead",
+        "view_responses"
+      ],
+      "description": "Founder & Executive Director with full administrative privileges"
+    },
+    "colead": {
+      "name": "Co-Lead",
+      "permissions": [
+        "view_messages",
+        "send_messages",
+        "view_responses"
+      ],
+      "description": "Deputy Executive Director with messaging privileges"
+    },
+    "general": {
+      "name": "General User",
+      "permissions": [
+        "view_messages",
+        "respond_to_messages"
+      ],
+      "description": "General executive member with view and respond privileges"
+    }
+  },
+  "initial_users": [
+    {
+      "name": "Jaewon Choi",
+      "email": "jaewon.choi@dmun.org",
+      "role": "lead",
+      "title": "Founder & Executive Director"
+    },
+    {
+      "name": "Harshan M V",
+      "email": "harshan.mv@dmun.org",
+      "role": "colead",
+      "title": "Deputy Executive Director"
+    },
+    {
+      "name": "Ishaan Bajaj",
+      "email": "ishaan.bajaj@dmun.org",
+      "role": "general",
+      "title": "Programs Associate"
+    }
+  ]
+}

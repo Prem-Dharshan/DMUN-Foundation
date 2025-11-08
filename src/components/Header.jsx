@@ -251,6 +251,13 @@ const Header = ({ onMenuClick }) => {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/executives/login">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Executives
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </Navigation>

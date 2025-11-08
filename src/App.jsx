@@ -23,6 +23,14 @@ import Membership from './pages/Membership';
 import Partner from './pages/Partner';
 import Publications from './pages/Publications';
 
+// Executive Portal Imports
+import { ExecutiveAuthProvider } from './executives/context/ExecutiveAuthContext';
+import ProtectedRoute from './executives/components/ProtectedRoute';
+import ExecutiveLogin from './executives/pages/ExecutiveLogin';
+import ExecutiveDashboard from './executives/pages/ExecutiveDashboard';
+import AdminPanel from './executives/pages/AdminPanel';
+import CoLeadMessaging from './executives/pages/CoLeadMessaging';
+
 const GlobalStyle = createGlobalStyle`
   body, h1, h2, h3, h4, h5, h6, p, a, span, div, li, label, input, th, td {
     /* color: #002147; */ /* Removed this line */
@@ -40,43 +48,67 @@ function App() {
 
   return (
     <Router>
-      <GlobalStyle />
-      {!menuOpen && <Header onMenuClick={() => setMenuOpen(true)} />}
-      <MenuDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
-      <main className="main-content">
+      <ExecutiveAuthProvider>
+        <GlobalStyle />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/advocacy" element={<Advocacy />} />
-          {/* Removed specific subnav routes for Advocacy */}
-          {/* <Route path="/advocacy/education" element={<Advocacy />} /> */}
-          {/* <Route path="/advocacy/environment" element={<Advocacy />} /> */}
-          {/* <Route path="/advocacy/social-justice" element={<Advocacy />} /> */}
-          <Route path="/programs" element={<Programs />} />
-          {/* Removed specific subnav routes for Programs */}
-          {/* <Route path="/programs/youth-leadership" element={<Programs />} /> */}
-          {/* <Route path="/programs/community-service" element={<Programs />} /> */}
-          {/* <Route path="/programs/global-education" element={<Programs />} /> */}
-          <Route path="/research" element={<Research />} />
-          <Route path="/Publications" element={<Publications />} />
-          <Route path="/Membership" element={<Membership menuOpen={menuOpen} />} />
-          {/* Removed specific subnav routes for Research */}
-          {/* <Route path="/research/publications" element={<Research />} /> */}
-          {/* <Route path="/research/projects" element={<Research />} /> */}
-          {/* <Route path="/research/partners" element={<Research />} /> */}
-          <Route path="/integrity" element={<Integrity />} />
-          <Route path="/mandate" element={<Mandate />} />
-          <Route path="/take-action" element={<TakeAction />} />
-          <Route path="/newsroom" element={<Newsroom />} />
-          <Route path="/newsroom/:id" element={<ArticlePage />} />
-          <Route path="/donate" element={<Donate />} />
-          <Route path="/donor-relations" element={<DonorRelations />} />
-          <Route path="/volunteer" element={<Volunteer />} />
-          <Route path="/test" element={<TestPage />} />
-          <Route path="/partner" element={<Partner />} />
+          {/* Executive Portal Routes - No Header/Footer */}
+          <Route path="/executives/login" element={<ExecutiveLogin />} />
+          <Route 
+            path="/executives/dashboard" 
+            element={
+              <ProtectedRoute>
+                <ExecutiveDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/executives/admin" 
+            element={
+              <ProtectedRoute requiredPermission="add_user">
+                <AdminPanel />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/executives/messaging" 
+            element={
+              <ProtectedRoute requiredPermission="send_messages">
+                <CoLeadMessaging />
+              </ProtectedRoute>
+            } 
+          />
+
+          {/* Main Site Routes - With Header/Footer */}
+          <Route path="/*" element={
+            <>
+              {!menuOpen && <Header onMenuClick={() => setMenuOpen(true)} />}
+              <MenuDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
+              <main className="main-content">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/advocacy" element={<Advocacy />} />
+                  <Route path="/programs" element={<Programs />} />
+                  <Route path="/research" element={<Research />} />
+                  <Route path="/Publications" element={<Publications />} />
+                  <Route path="/Membership" element={<Membership menuOpen={menuOpen} />} />
+                  <Route path="/integrity" element={<Integrity />} />
+                  <Route path="/mandate" element={<Mandate />} />
+                  <Route path="/take-action" element={<TakeAction />} />
+                  <Route path="/newsroom" element={<Newsroom />} />
+                  <Route path="/newsroom/:id" element={<ArticlePage />} />
+                  <Route path="/donate" element={<Donate />} />
+                  <Route path="/donor-relations" element={<DonorRelations />} />
+                  <Route path="/volunteer" element={<Volunteer />} />
+                  <Route path="/test" element={<TestPage />} />
+                  <Route path="/partner" element={<Partner />} />
+                </Routes>
+              </main>
+              <Footer />
+            </>
+          } />
         </Routes>
-      </main>
-      <Footer />
+      </ExecutiveAuthProvider>
     </Router>
   )
 }
