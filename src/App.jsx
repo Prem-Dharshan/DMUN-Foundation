@@ -23,6 +23,7 @@ import Membership from './pages/Membership';
 import Partner from './pages/Partner';
 import Publications from './pages/Publications';
 import ExecutiveLeadership from './pages/ExecutiveLeadership';
+import DraftAssistant from './pages/DraftAssistant';
 
 // Executive Portal Imports
 import { ExecutiveAuthProvider } from './executives/context/ExecutiveAuthContext';
@@ -126,6 +127,7 @@ function MainAppContent({ menuOpen, setMenuOpen }) {
                 <Route path="/test" element={<TestPage />} />
                 <Route path="/partner" element={<Partner />} />
                 <Route path="/executive-leadership" element={<ExecutiveLeadership />} />
+                <Route path="/draft-assistant" element={<DraftAssistant />} />
               </Routes>
             </main>
             <Footer />

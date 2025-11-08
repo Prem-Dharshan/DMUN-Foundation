@@ -235,6 +235,7 @@ const MenuDrawer = ({ open, onClose }) => {
             <MenuLink to="/donor-relations" onClick={() => handleLinkClick("/donor-relations")}>Donor Relations</MenuLink>
             <MenuLink to="/mandate" onClick={() => handleLinkClick("/mandate")}>Our Mission</MenuLink>
             <MenuLink to="/publications" onClick={() => handleLinkClick("/publications")}>Publications</MenuLink>
+            <MenuLink to="/draft-assistant" onClick={() => handleLinkClick("/draft-assistant")}>Draft Assistant</MenuLink>
           </MenuSection>
 
           <BottomSection>

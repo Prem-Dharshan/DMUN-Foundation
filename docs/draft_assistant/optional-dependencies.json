@@ -1,0 +1,20 @@
+{
+  "name": "dmun-foundation-draft-assistant",
+  "description": "Optional dependencies for GMUN Documents Draft Assistant file format support",
+  "optionalDependencies": {
+    "pdf-parse": "^1.1.1",
+    "mammoth": "^1.6.0"
+  },
+  "instructions": {
+    "note": "These dependencies are OPTIONAL for the Draft Assistant",
+    "txtSupport": "Works immediately without any additional packages",
+    "pdfSupport": "Run: npm install pdf-parse",
+    "docxSupport": "Run: npm install mammoth",
+    "installation": "npm install pdf-parse mammoth",
+    "updateRequired": [
+      "Update extractTextFromPDF function in /src/utils/documentEvaluator.js",
+      "Update extractTextFromDOCX function in /src/utils/documentEvaluator.js",
+      "See IMPLEMENTATION_GUIDE.md for code examples"
+    ]
+  }
+}
