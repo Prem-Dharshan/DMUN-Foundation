@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { MapPinIcon, PhoneIcon } from '@heroicons/react/24/solid';
+import { EnvelopeIcon } from '@heroicons/react/24/outline';
 
 const DARK_BLUE = '#002147';
 
@@ -12,14 +14,14 @@ const FooterBar = styled.footer`
 
 // Styled component for the main content container to control width and padding
 const FooterContentWrapper = styled.div`
-  max-width: 1200px; /* Set max-width for the content */
-  margin: 0 auto; /* Center the content wrapper */
-  padding: 0 5vw;
-  padding-bottom: 4.5rem; /* Increased bottom padding for more visual space */
+  width: 100%;
+  padding-bottom: 3rem; /* Reduced bottom padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center children horizontally */
 
   @media (max-width: 768px) {
-    padding: 0 3vw;
-    padding-bottom: 3.5rem; /* Adjusted mobile bottom padding */
+    padding-bottom: 2rem; /* Reduced mobile bottom padding */
   }
 `;
 
@@ -27,7 +29,7 @@ const FooterContentWrapper = styled.div`
 const TakeActionHeading = styled.h3`
   font-style: italic;
   font-family: var(--andover-font-serif);
-  text-align: left; /* Left-aligned within the content wrapper */
+  text-align: center; /* Center-aligned within the content wrapper */
   margin: 0; /* Remove margin, controlled by parent */
   color: ${DARK_BLUE}; /* Ensure correct color */
   font-size: 2.2rem; /* Increased size significantly */
@@ -35,7 +37,6 @@ const TakeActionHeading = styled.h3`
   white-space: nowrap; /* Prevent wrapping */
 
   @media (max-width: 768px) {
-    text-align: center; /* Center on mobile */
     font-size: 1.8rem; /* Adjusted mobile size */
   }
 `;
@@ -43,15 +44,13 @@ const TakeActionHeading = styled.h3`
 const Actions = styled.div`
   margin: 0;
   display: flex;
-  justify-content: flex-start; /* Align buttons to the start of the flex container */
-  gap: 1.5rem; /* Adjusted gap between buttons */
-  margin-left: 70px; /* Increased to move buttons further to the right */
-  /* Removed padding-bottom */
+  justify-content: center; /* Center the buttons */
+  gap: 2.5rem; /* Increased gap between buttons */
+  width: 100%; /* Take full width */
 
   @media (max-width: 768px) {
     gap: 1rem; /* Smaller gap on mobile */
     flex-wrap: wrap; /* Allow buttons to wrap on mobile */
-    justify-content: center; /* Ensure centering on mobile */
   }
 `;
 
@@ -79,30 +78,10 @@ const ActionBtn = styled.a`
 const Divider = styled.div`
   border-bottom: 1px dotted var(--andover-accent);
   width: 100%;
-  margin: 2.8rem auto; /* Adjusted margin top/bottom for more precise spacing */
+  margin: 2rem auto; /* Reduced margin for tighter spacing */
 `;
 
-// Styled component for the main 3-column grid section
-const MainFooterGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1.2fr 2.1fr 1.8fr; /* Fine-tuned column widths based on image */
-  gap: 4.5rem; /* Increased gap between columns for more space */
-  padding-bottom: 0; /* Remove bottom padding, handled by wrapper */
-  align-items: start; /* Align grid items to the top */
-
-  @media (max-width: 1024px) { /* Adjust columns for smaller desktops/tablets */
-    grid-template-columns: 1fr 1fr; /* Stack to 2 columns */
-    gap: 2.5rem; /* Adjusted gap for 2 columns */
-    padding-bottom: 0;
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* Stack columns on mobile */
-    gap: 2rem;
-    text-align: center; /* Center content on mobile */
-    padding-bottom: 0;
-  }
-`;
+// We'll move MainFooterGrid to the end of the file, after all other styled components are defined
 
 // Styled component for the Logo + Branding column
 const LogoBranding = styled.div`
@@ -154,38 +133,181 @@ const InstitutionName = styled.div`
 
 // Styled component for the Address + Description column
 const AddressDescription = styled.div`
-  text-align: center; /* Center align content based on image */
   color: ${DARK_BLUE};
   font-family: var(--andover-font-sans);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  align-items: flex-start;
 
-  p {
-    max-width: 400px; /* Limit paragraph width */
-    margin: 0 auto 1.5rem auto; /* Center paragraph and add bottom margin */
-    font-size: 1rem;
-    line-height: 1.6;
-    color: ${DARK_BLUE}; /* Ensure correct color */
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+`;
+
+const AddressBlock = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+
+  &:hover {
+    background-color: rgba(0, 33, 71, 0.05);
   }
 
-  div {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color: ${DARK_BLUE}; /* Ensure correct color */
+  @media (max-width: 1200px) {
+    width: 100%;
+    max-width: none;
   }
 
   @media (max-width: 768px) {
-    text-align: center; /* Ensure centered on mobile */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+  }
+`;
+
+const AddressIcon = styled.div`
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: ${DARK_BLUE};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+const AddressText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+  flex: 1;
+  width: 100%;
+
+  h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: ${DARK_BLUE};
+    white-space: nowrap;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: ${DARK_BLUE};
+    white-space: nowrap;
+  }
+`;
+
+const ContactInfo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: ${DARK_BLUE};
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  white-space: nowrap;
+  width: 100%;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+`;
+
+const ReachOut = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  h3 {
+    color: ${DARK_BLUE};
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  ${AddressBlock} {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+    margin: 0 0 0.25rem 0; /* Reduced bottom margin */
+    
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  ${AddressText} {
+    align-items: flex-start;
+  }
+
+  ${ContactInfo} {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    align-items: center;
+
+    h3 {
+      text-align: center;
+    }
+
+    ${AddressBlock} {
+      align-items: center;
+      text-align: center;
+
+      ${AddressText} {
+        align-items: center;
+      }
+    }
   }
 `;
 
 const QuickLinks = styled.div`
-  margin: 0;
+  margin: 0; /* Remove top margin since we'll add h3 */
   display: flex;
   flex-direction: column; /* Stack links vertically */
-  gap: 0.8rem; /* Space between links */
-  align-items: flex-end; /* Align links to the right within column */
+  gap: 0.6rem; /* Reduced space between links */
+  align-items: flex-start; /* Align links to the left to match other content */
+  width: 100%;
+
+  h3 {
+    color: ${DARK_BLUE};
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap; /* Prevent title from breaking into two lines */
+  }
 
   @media (max-width: 768px) {
     align-items: center; /* Center links on mobile */
+    
+    h3 {
+      text-align: center;
+    }
   }
 `;
 
@@ -194,6 +316,8 @@ const QuickLink = styled.a`
   font-size: 1rem;
   font-family: var(--andover-font-sans);
   text-decoration: none; /* Ensure no underline by default */
+  white-space: nowrap; /* Prevent text wrapping */
+  display: block; /* Ensure full width for hover effect */
 
   &:hover {
     text-decoration: underline;
@@ -202,16 +326,16 @@ const QuickLink = styled.a`
 
 // Styled component for the social icons container (part of the right column)
 const Socials = styled.div`
-  margin-top: 2.8rem; /* Adjusted space above social icons for precision */
+  margin-top: 0.25rem; /* Further reduced margin for tighter spacing */
   display: flex;
-  justify-content: flex-end; /* Align icons to the right */
-  gap: 1.5rem; /* Space between icons (24px) */
+  justify-content: flex-start;
+  gap: 1.5rem;
+  width: 100%;
 
   @media (max-width: 768px) {
-    margin-top: 2rem; /* Adjusted mobile top margin */
-    justify-content: center; /* Center social icons on mobile */
-    gap: 1rem; /* Smaller gap on mobile */
-    flex-wrap: wrap; /* Allow icons to wrap */
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 `;
 
@@ -236,17 +360,19 @@ const SocialIcon = styled.span`
 
 const ActionRow = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 3rem; /* Space between the heading and the buttons */
-  padding-top: 4.5rem; /* Match original padding for the whole row */
-  padding-bottom: 1.8rem; /* Match original padding for the whole row */
+  justify-content: center;
+  gap: 2rem; /* Space between heading and buttons */
+  padding: 3rem 5vw 1.5rem; /* Reduced top/bottom padding */
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1200px; /* Limit the width */
+  margin: 0 auto; /* Center in the screen */
 
   @media (max-width: 768px) {
-    flex-direction: column; /* Stack on mobile */
-    align-items: center; /* Center items on mobile */
     gap: 1.5rem; /* Adjusted gap for mobile */
-    padding-top: 2.5rem; /* Adjusted mobile top padding */
-    padding-bottom: 1.5rem; /* Adjusted mobile bottom padding */
+    padding: 2rem 3vw 1rem; /* Reduced mobile padding */
   }
 `;
 
@@ -271,21 +397,65 @@ const Footer = () => (
         </LogoBranding>
 
         <AddressDescription>
-          <p>
-            The Secretariat of the DMUN Foundation:<br/>
-            4th Floor, 12 Gangnamdaero 156-gil, Seoul, Republic of Korea 06035<br/>
-            </p>
-            <p>
-            The Liaison Office of the DMUN Foundation in the Americas:<br/>
-            Unit 1814, 50 Causeway St., Boston, MA, USA 02114
-          </p>
-          <div>enquiries@dmun.org</div>
-          <div>Liaison Office: +1 (339) 927 8826</div>
-          <div>Secretariat: +82 10 5696 8302</div>
+          <AddressBlock>
+            <AddressIcon>
+              <MapPinIcon />
+            </AddressIcon>
+            <AddressText>
+              <h4>The Secretariat</h4>
+              <p>4th Floor, 12 Gangnamdaero 156-gil<br />Seoul, Republic of Korea 06035</p>
+              <ContactInfo>
+                <PhoneIcon />
+                +82 10 5696 8302
+              </ContactInfo>
+            </AddressText>
+          </AddressBlock>
+
+          <AddressBlock>
+            <AddressIcon>
+              <MapPinIcon />
+            </AddressIcon>
+            <AddressText>
+              <h4>The Liaison Office</h4>
+              <p>Unit 1814, 50 Causeway St.<br />Boston, MA, USA 02114</p>
+              <ContactInfo>
+                <PhoneIcon />
+                +1 (339) 927 8826
+              </ContactInfo>
+            </AddressText>
+          </AddressBlock>
         </AddressDescription>
 
-        <div> {/* Container for Quick Links and Socials in the right column */}
-          <QuickLinks> {/* Quick Links */}
+        <ContactAndLinksContainer>
+          <ReachOut>
+            <h3>Reach Out to Us</h3>
+            <AddressBlock>
+              <AddressIcon>
+                <EnvelopeIcon />
+              </AddressIcon>
+              <AddressText>
+                <h4>Email Us</h4>
+                <ContactInfo>
+                  enquiries@dmun.org
+                </ContactInfo>
+              </AddressText>
+            </AddressBlock>
+
+            <Socials> {/* Social icons */}
+              <SocialIcon as="a" href="https://www.instagram.com/discovermun/" target="_blank" rel="noopener noreferrer">
+                <img src="/instagram-icon.png" alt="Instagram" />
+              </SocialIcon>
+              <SocialIcon as="a" href="https://www.linkedin.com/company/dmun-foundation/" target="_blank" rel="noopener noreferrer">
+                <img src="/linkedin-icon.png" alt="LinkedIn" />
+              </SocialIcon>
+              <SocialIcon as="a" href="https://www.youtube.com/@dmunfoundation" target="_blank" rel="noopener noreferrer">
+                <img src="/Youtube-icon.png" alt="Youtube" />
+              </SocialIcon>
+            </Socials>
+          </ReachOut>
+          
+          <QuickLinks>
+            <h3>Quick Links</h3>
             <QuickLink href="/donor-relations">Donor Relations</QuickLink>
             <QuickLink href="/integrity">Integrity</QuickLink>
             <QuickLink href="/newsroom">News</QuickLink>
@@ -293,19 +463,7 @@ const Footer = () => (
             <QuickLink href="https://docs.google.com/document/d/1QTCCh-nEZfUvIFdN0KzOfbDRWMk05jKL6IOv9okRB5c/edit?usp=sharing">Privacy Policy</QuickLink>
             <QuickLink href="https://docs.google.com/document/d/1QTCCh-nEZfUvIFdN0KzOfbDRWMk05jKL6IOv9okRB5c/edit?usp=sharing">Terms of Use</QuickLink>
           </QuickLinks>
-
-          <Socials> {/* Social icons */}
-            <SocialIcon as="a" href="https://www.instagram.com/discovermun/" target="_blank" rel="noopener noreferrer">
-              <img src="/instagram-icon.png" alt="Instagram" />
-            </SocialIcon>
-            <SocialIcon as="a" href="https://www.linkedin.com/company/dmun-foundation/" target="_blank" rel="noopener noreferrer">
-              <img src="/linkedin-icon.png" alt="LinkedIn" />
-            </SocialIcon>
-            <SocialIcon as="a" href="https://www.youtube.com/@dmunfoundation" target="_blank" rel="noopener noreferrer">
-              <img src="/Youtube-icon.png" alt="Youtube" />
-            </SocialIcon>
-          </Socials>
-        </div>
+        </ContactAndLinksContainer>
       </MainFooterGrid>
     </FooterContentWrapper>
     <CopyrightText>© 2025 DMUN Foundation, All Rights Reserved.</CopyrightText>
@@ -321,6 +479,67 @@ const CopyrightText = styled.div`
   padding: 1.5rem 0;
   width: 100%;
   background: var(--andover-blue); /* Match footer background */
+`;
+
+// Styled component for the main 3-column grid section
+const ContactAndLinksContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem; /* Matched with MainFooterGrid gap */
+  width: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+`;
+
+const MainFooterGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.5fr; /* Logo, Addresses, Contact+Links */
+  gap: 4rem; /* Increased gap between main columns */
+  padding: 0 5vw; /* Added horizontal padding */
+  align-items: start; /* Align grid items to the top */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 1.5fr; /* Stack to 2 columns with better proportion */
+    gap: 3.5rem; /* Increased gap for better separation */
+
+    ${LogoBranding} {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    ${AddressDescription} {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    ${ReachOut}, ${QuickLinks} {
+      grid-column: span 1;
+      grid-row: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* Stack columns on mobile */
+    gap: 2rem;
+    text-align: center; /* Center content on mobile */
+    padding: 0 3vw; /* Adjusted mobile padding */
+
+    ${LogoBranding}, ${AddressDescription}, ${ReachOut}, ${QuickLinks} {
+      grid-column: 1;
+    }
+
+    ${LogoBranding} { grid-row: 1; }
+    ${AddressDescription} { grid-row: 2; }
+    ${ReachOut} { grid-row: 3; }
+    ${QuickLinks} { grid-row: 4; }
+  }
 `;
 
 export default Footer;
