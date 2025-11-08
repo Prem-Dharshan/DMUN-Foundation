@@ -10,10 +10,12 @@ const PAGE_BACKGROUND_COLOR = '#E7F1FA';
 const NewsroomContainer = styled.div`
   background-color: ${PAGE_BACKGROUND_COLOR};
   padding: 4rem 15vw;
+  margin-top: 70px; /* Push content below fixed header */
   min-height: 100vh;
 
   @media (max-width: 768px) {
     padding: 2rem 5vw;
+    margin-top: 70px; /* Push content below fixed header */
   }
 `;
 

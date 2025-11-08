@@ -1,0 +1,403 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-11-08",
+  "roles": {
+    "delegate": {
+      "name": "Delegate",
+      "description": "Students participating in MUN conferences",
+      "priority": 1,
+      "contentModifications": {
+        "heroMessage": {
+          "title": "Welcome Back, Delegate!",
+          "subtitle": "Your next conference adventure awaits",
+          "ctaText": "View Upcoming Conferences",
+          "ctaLink": "/programs"
+        },
+        "banners": [
+          {
+            "id": "conference-promo",
+            "type": "promotional",
+            "position": "top",
+            "content": "🎯 Early Bird Registration: DMUN Annual Meetings 2025 - Register by Dec 15th for 20% off!",
+            "link": "https://mymun.com/conferences/dmun-debate-2025",
+            "backgroundColor": "#44b8f3",
+            "textColor": "#ffffff",
+            "dismissible": true,
+            "priority": "high"
+          },
+          {
+            "id": "skill-workshop",
+            "type": "informational",
+            "position": "floating",
+            "content": "💡 Pro Tip: Join our free Public Speaking Workshop this Saturday!",
+            "link": "/programs",
+            "backgroundColor": "#002147",
+            "textColor": "#ffffff",
+            "dismissible": true,
+            "priority": "medium"
+          }
+        ],
+        "wordingOverrides": {
+          "participate": "Compete",
+          "join": "Register Now",
+          "learn": "Master Your Skills",
+          "programs": "Conferences & Competitions",
+          "membership": "Delegate Portal"
+        },
+        "highlightedSections": [
+          "upcoming-events",
+          "programs",
+          "advocacy"
+        ],
+        "personalizedContent": {
+          "statsEmphasis": ["conferences", "delegates", "countries"],
+          "testimonialType": "delegate-success",
+          "recommendedPages": ["/programs", "/take-action", "/newsroom"]
+        }
+      }
+    },
+    "parent": {
+      "name": "Parent/Guardian",
+      "description": "Parents or guardians of potential participants",
+      "priority": 2,
+      "contentModifications": {
+        "heroMessage": {
+          "title": "Empower Your Child's Future",
+          "subtitle": "Help your ward gain command over English, public speaking, and leadership",
+          "ctaText": "Learn About Our Programs",
+          "ctaLink": "/programs"
+        },
+        "banners": [
+          {
+            "id": "parent-info",
+            "type": "informational",
+            "position": "top",
+            "content": "👨‍👩‍👧‍👦 Help your child develop critical thinking, leadership, and communication skills through MUN",
+            "link": "/about",
+            "backgroundColor": "#97e1e6",
+            "textColor": "#002147",
+            "dismissible": true,
+            "priority": "high"
+          }
+        ],
+        "wordingOverrides": {
+          "participate": "Enroll your child",
+          "join": "Get your ward started",
+          "learn": "Develop essential skills",
+          "programs": "Youth Development Programs",
+          "student": "your child",
+          "youth": "your ward",
+          "volunteer": "Support your child's involvement"
+        },
+        "highlightedSections": [
+          "day-in-life",
+          "integrity",
+          "impact-stats"
+        ],
+        "personalizedContent": {
+          "statsEmphasis": ["success-rate", "skill-development", "university-admission"],
+          "testimonialType": "parent-testimonial",
+          "recommendedPages": ["/about", "/integrity", "/programs"],
+          "additionalInfo": [
+            {
+              "section": "benefits",
+              "title": "Why Parents Choose DMUN",
+              "points": [
+                "Develop critical thinking and analytical skills",
+                "Enhance public speaking and confidence",
+                "Build leadership and teamwork abilities",
+                "Improve English language proficiency",
+                "Gain global awareness and cultural sensitivity",
+                "100% free participation - no hidden costs",
+                "Safe, moderated online environment"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "educator": {
+      "name": "Educator/Teacher",
+      "description": "Teachers and educational professionals",
+      "priority": 3,
+      "contentModifications": {
+        "heroMessage": {
+          "title": "Transform Your Classroom",
+          "subtitle": "Bring world-class diplomacy education to your students",
+          "ctaText": "Educator Resources",
+          "ctaLink": "/programs"
+        },
+        "banners": [
+          {
+            "id": "educator-toolkit",
+            "type": "promotional",
+            "position": "top",
+            "content": "📚 Free Educator Toolkit: Download curriculum guides and teaching resources",
+            "link": "/research",
+            "backgroundColor": "#002147",
+            "textColor": "#ffffff",
+            "dismissible": true,
+            "priority": "high"
+          }
+        ],
+        "wordingOverrides": {
+          "participate": "Integrate into curriculum",
+          "join": "Partner with us",
+          "learn": "Professional development",
+          "programs": "Educational Programs",
+          "student": "your students"
+        },
+        "highlightedSections": [
+          "research",
+          "publications",
+          "programs"
+        ],
+        "personalizedContent": {
+          "statsEmphasis": ["educational-impact", "student-growth", "schools-partnered"],
+          "testimonialType": "educator-feedback",
+          "recommendedPages": ["/research", "/publications", "/partner"],
+          "additionalInfo": [
+            {
+              "section": "educator-benefits",
+              "title": "For Educators",
+              "points": [
+                "Align with curriculum standards",
+                "Free professional development workshops",
+                "Access to teaching resources and materials",
+                "Student progress tracking and assessment",
+                "Collaborate with global educator network",
+                "Recognition and certification opportunities"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "volunteer": {
+      "name": "Volunteer/Contributor",
+      "description": "Individuals interested in volunteering or supporting",
+      "priority": 4,
+      "contentModifications": {
+        "heroMessage": {
+          "title": "Make a Difference",
+          "subtitle": "Join our global community of changemakers",
+          "ctaText": "Start Volunteering",
+          "ctaLink": "/volunteer"
+        },
+        "banners": [
+          {
+            "id": "volunteer-opportunities",
+            "type": "promotional",
+            "position": "top",
+            "content": "🤝 Volunteer Opportunities: Help organize our next conference!",
+            "link": "/volunteer",
+            "backgroundColor": "#44b8f3",
+            "textColor": "#ffffff",
+            "dismissible": true,
+            "priority": "high"
+          }
+        ],
+        "wordingOverrides": {
+          "participate": "Contribute",
+          "join": "Become a volunteer",
+          "learn": "Make an impact",
+          "programs": "Volunteer Opportunities"
+        },
+        "highlightedSections": [
+          "volunteer",
+          "take-action",
+          "impact-stats"
+        ],
+        "personalizedContent": {
+          "statsEmphasis": ["volunteer-hours", "impact-reach", "communities-served"],
+          "testimonialType": "volunteer-story",
+          "recommendedPages": ["/volunteer", "/take-action", "/donate"]
+        }
+      }
+    },
+    "donor": {
+      "name": "Donor/Sponsor",
+      "description": "Potential donors and organizational sponsors",
+      "priority": 5,
+      "contentModifications": {
+        "heroMessage": {
+          "title": "Invest in Tomorrow's Leaders",
+          "subtitle": "Your support creates lasting impact on youth worldwide",
+          "ctaText": "Explore Partnership Opportunities",
+          "ctaLink": "/partner"
+        },
+        "banners": [
+          {
+            "id": "impact-report",
+            "type": "informational",
+            "position": "top",
+            "content": "📊 2024 Impact Report: See how your support transformed 26,927 lives",
+            "link": "/donor-relations",
+            "backgroundColor": "#97e1e6",
+            "textColor": "#002147",
+            "dismissible": true,
+            "priority": "high"
+          }
+        ],
+        "wordingOverrides": {
+          "participate": "Partner",
+          "join": "Become a sponsor",
+          "learn": "See our impact",
+          "programs": "Funded Initiatives",
+          "donate": "Maximize Your Impact"
+        },
+        "highlightedSections": [
+          "impact-stats",
+          "donor-relations",
+          "transparency"
+        ],
+        "personalizedContent": {
+          "statsEmphasis": ["funds-raised", "programs-funded", "roi-impact"],
+          "testimonialType": "donor-impact",
+          "recommendedPages": ["/donor-relations", "/partner", "/integrity"],
+          "additionalInfo": [
+            {
+              "section": "donor-benefits",
+              "title": "Partnership Benefits",
+              "points": [
+                "100% transparency in fund allocation",
+                "Quarterly impact reports and metrics",
+                "Recognition in publications and events",
+                "Tax-deductible contributions",
+                "Direct engagement with beneficiaries",
+                "Corporate social responsibility opportunities"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "alumni": {
+      "name": "Alumni",
+      "description": "Former DMUN participants",
+      "priority": 6,
+      "contentModifications": {
+        "heroMessage": {
+          "title": "Welcome Home, Alumni!",
+          "subtitle": "Continue your journey with the DMUN community",
+          "ctaText": "Alumni Network",
+          "ctaLink": "/membership"
+        },
+        "banners": [
+          {
+            "id": "alumni-reunion",
+            "type": "promotional",
+            "position": "top",
+            "content": "🎓 Alumni Reunion 2025: Reconnect with your DMUN family this July!",
+            "link": "/newsroom",
+            "backgroundColor": "#002147",
+            "textColor": "#ffffff",
+            "dismissible": true,
+            "priority": "high"
+          }
+        ],
+        "wordingOverrides": {
+          "participate": "Reconnect",
+          "join": "Return to DMUN",
+          "learn": "Give back",
+          "programs": "Mentorship Opportunities"
+        },
+        "highlightedSections": [
+          "alumni-network",
+          "mentorship",
+          "newsroom"
+        ],
+        "personalizedContent": {
+          "statsEmphasis": ["alumni-network", "career-advancement", "continued-impact"],
+          "testimonialType": "alumni-success",
+          "recommendedPages": ["/membership", "/volunteer", "/newsroom"]
+        }
+      }
+    },
+    "media": {
+      "name": "Media/Press",
+      "description": "Journalists and media professionals",
+      "priority": 7,
+      "contentModifications": {
+        "heroMessage": {
+          "title": "Press & Media Center",
+          "subtitle": "Latest news, press releases, and media resources",
+          "ctaText": "Media Kit",
+          "ctaLink": "/newsroom"
+        },
+        "banners": [
+          {
+            "id": "press-release",
+            "type": "informational",
+            "position": "top",
+            "content": "📰 Latest: DMUN Foundation participates in UN Summit of the Future",
+            "link": "/newsroom/1",
+            "backgroundColor": "#44b8f3",
+            "textColor": "#ffffff",
+            "dismissible": true,
+            "priority": "high"
+          }
+        ],
+        "wordingOverrides": {
+          "participate": "Cover our story",
+          "join": "Media inquiries",
+          "learn": "Press resources"
+        },
+        "highlightedSections": [
+          "newsroom",
+          "press-releases",
+          "media-contact"
+        ],
+        "personalizedContent": {
+          "statsEmphasis": ["global-reach", "media-coverage", "press-mentions"],
+          "testimonialType": "media-quotes",
+          "recommendedPages": ["/newsroom", "/about", "/executive-leadership"]
+        }
+      }
+    },
+    "default": {
+      "name": "General Visitor",
+      "description": "First-time visitors or unspecified users",
+      "priority": 999,
+      "contentModifications": {
+        "heroMessage": {
+          "title": "Representing Youth, Building Leaders.",
+          "subtitle": "Join the global movement empowering young leaders",
+          "ctaText": "Explore DMUN",
+          "ctaLink": "/about"
+        },
+        "banners": [],
+        "wordingOverrides": {},
+        "highlightedSections": [
+          "all"
+        ],
+        "personalizedContent": {
+          "statsEmphasis": ["members", "countries", "programs"],
+          "testimonialType": "general",
+          "recommendedPages": ["/about", "/programs", "/take-action"]
+        }
+      }
+    }
+  },
+  "globalSettings": {
+    "enableOrchestration": true,
+    "allowUserSelection": true,
+    "rememberUserChoice": true,
+    "cookieDuration": 30,
+    "defaultRole": "default",
+    "roleSelectionPrompt": {
+      "enabled": true,
+      "title": "Personalize Your Experience",
+      "message": "Help us show you the most relevant content",
+      "showOnFirstVisit": true,
+      "showOnHomepage": true
+    }
+  },
+  "adminOverrides": {
+    "description": "Lead can override these rules via admin panel",
+    "canDisableRoles": true,
+    "canModifyBanners": true,
+    "canAdjustPriority": true,
+    "canAddCustomRules": true
+  }
+}

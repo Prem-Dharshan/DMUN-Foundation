@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import SplitText from '../components/SplitText';
 import { Link } from 'react-router-dom';
+import { useOrchestration } from '../context/OrchestrationContext';
+import { OrchestrationHero, OrchText, OrchSection } from '../components/OrchestrationHelpers';
 
 const ABBOT_BLUE = '#44b8f3'; // The new primary color
 const DARK_BLUE = '#002147'; // Keeping for high contrast on light backgrounds
@@ -758,140 +760,152 @@ const newsData = [
 const Home = () => {
   const [activeImage, setActiveImage] = useState(glanceData[0].imageUrl);
   const [hoveredItemId, setHoveredItemId] = useState(null);
+  const { getHeroMessage, userRole, getWording } = useOrchestration();
+  const heroConfig = getHeroMessage();
 
   return (
     <MainContentFrame>
-      <HeroWrapper className="dmun-hero-section">
-      <div className="dmun-hero-text" style={{ textAlign: 'center' }}>
-  <SplitText
-    text="Representing Youth,"
-    delay={100}
-    duration={0.6}
-    ease="power3.out"
-    splitType="words, chars"
-    from={{ opacity: 0, y: 40 }}
-    to={{ opacity: 1, y: 0 }}
-    threshold={0.1}
-    rootMargin="-100px"
-    style={{
-      position: 'relative',
-      zIndex: 3,
-      color: '#FFFFFF',
-      fontSize: '6vw',
-      fontFamily: 'Benton Sans Bold, var(--andover-font-sans)',
-      fontWeight: 700,
-      letterSpacing: '3px',
-      textShadow: 'none',
-      textTransform: 'uppercase',
-      lineHeight: 1.2,
-    }}
-  />
-  <br />
-  <SplitText
-    text="Building Leaders."
-    delay={100}
-    duration={0.6}
-    ease="power3.out"
-    splitType="words, chars"
-    from={{ opacity: 0, y: 40 }}
-    to={{ opacity: 1, y: 0 }}
-    threshold={0.1}
-    rootMargin="-100px"
-    style={{
-      position: 'relative',
-      zIndex: 3,
-      color: '#FFFFFF',
-      fontSize: '6vw',
-      fontFamily: 'Benton Sans Bold, var(--andover-font-sans)',
-      fontWeight: 700,
-      letterSpacing: '3px',
-      textShadow: 'none',
-      textTransform: 'uppercase',
-      lineHeight: 1.2,
-      marginTop: '-5vw',
-    }}
-  />
-</div>
-      </HeroWrapper>
+      {/* Show orchestrated hero if user has a specific role */}
+      {userRole !== 'default' && heroConfig ? (
+        <OrchestrationHero />
+      ) : (
+        <HeroWrapper className="dmun-hero-section">
+          <div className="dmun-hero-text" style={{ textAlign: 'center' }}>
+            <SplitText
+              text="Representing Youth,"
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="words, chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              style={{
+                position: 'relative',
+                zIndex: 3,
+                color: '#FFFFFF',
+                fontSize: '6vw',
+                fontFamily: 'Benton Sans Bold, var(--andover-font-sans)',
+                fontWeight: 700,
+                letterSpacing: '3px',
+                textShadow: 'none',
+                textTransform: 'uppercase',
+                lineHeight: 1.2,
+              }}
+            />
+            <br />
+            <SplitText
+              text="Building Leaders."
+              delay={100}
+              duration={0.6}
+              ease="power3.out"
+              splitType="words, chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-100px"
+              style={{
+                position: 'relative',
+                zIndex: 3,
+                color: '#FFFFFF',
+                fontSize: '6vw',
+                fontFamily: 'Benton Sans Bold, var(--andover-font-sans)',
+                fontWeight: 700,
+                letterSpacing: '3px',
+                textShadow: 'none',
+                textTransform: 'uppercase',
+                lineHeight: 1.2,
+                marginTop: '-5vw',
+              }}
+            />
+          </div>
+        </HeroWrapper>
+      )}
 
       <ContentWrapper>
-        <StatsSection>
-          {statsData.map((stat) => (
-            <StatBox
-              key={stat.id}
-              style={{ gridColumn: stat.gridColumn, gridRow: stat.gridRow }}
-            >
-              {stat.type === 'pie' && (
-                <>
-                  <StatPieChartSVG percentage={stat.percentage} />
-                  <StatPieChartLabel>{stat.pieLabel}</StatPieChartLabel>
-                  {stat.subLabel && <StatPieChartSubLabel>{stat.subLabel}</StatPieChartSubLabel>}
-                </>
-              )}
-              {stat.type === 'icon' && <StatIcon>{stat.icon}</StatIcon>}
-              {(stat.type === 'icon' || stat.type === 'text' || stat.type === 'pie') && (
-                <>
-                  {(stat.type === 'icon' || stat.type === 'text') && (
-                    <StatNumber dangerouslySetInnerHTML={{ __html: stat.number }} />
-                  )}
-                  {(stat.type === 'icon' || stat.type === 'text') && (
-                    <StatLabel dangerouslySetInnerHTML={{ __html: stat.label }} />
-                  )}
-                  {/* Handle the specific case for the first pie chart that also has a main number and label */}
-                  {stat.id === 1 && (
-                    <>
+        <OrchSection sectionId="impact-stats">
+          <StatsSection>
+            {statsData.map((stat) => (
+              <StatBox
+                key={stat.id}
+                style={{ gridColumn: stat.gridColumn, gridRow: stat.gridRow }}
+              >
+                {stat.type === 'pie' && (
+                  <>
+                    <StatPieChartSVG percentage={stat.percentage} />
+                    <StatPieChartLabel>{stat.pieLabel}</StatPieChartLabel>
+                    {stat.subLabel && <StatPieChartSubLabel>{stat.subLabel}</StatPieChartSubLabel>}
+                  </>
+                )}
+                {stat.type === 'icon' && <StatIcon>{stat.icon}</StatIcon>}
+                {(stat.type === 'icon' || stat.type === 'text' || stat.type === 'pie') && (
+                  <>
+                    {(stat.type === 'icon' || stat.type === 'text') && (
                       <StatNumber dangerouslySetInnerHTML={{ __html: stat.number }} />
+                    )}
+                    {(stat.type === 'icon' || stat.type === 'text') && (
                       <StatLabel dangerouslySetInnerHTML={{ __html: stat.label }} />
-                    </>
-                  )}
-                </>
-              )}
-            </StatBox>
-          ))}
-        </StatsSection>
+                    )}
+                    {/* Handle the specific case for the first pie chart that also has a main number and label */}
+                    {stat.id === 1 && (
+                      <>
+                        <StatNumber dangerouslySetInnerHTML={{ __html: stat.number }} />
+                        <StatLabel dangerouslySetInnerHTML={{ __html: stat.label }} />
+                      </>
+                    )}
+                  </>
+                )}
+              </StatBox>
+            ))}
+          </StatsSection>
+        </OrchSection>
 
-        <GlanceSectionContainer
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={sectionVariants}
-        >
-          <GlanceContentArea>
-            <GlanceImageColumn>
-              <img src={activeImage} alt="" />
-            </GlanceImageColumn>
-            <GlanceContentColumn>
-              <GlanceHeader>At a Glance</GlanceHeader>
-              {glanceData.map((item) => (
-                <GlanceTextBlock
-                  key={item.id}
-                  $isHovered={hoveredItemId === item.id}
-                  onMouseEnter={() => {
-                    setActiveImage(item.imageUrl);
-                    setHoveredItemId(item.id);
-                  }}
-                  onMouseLeave={() => {
-                    setActiveImage(glanceData[0].imageUrl);
-                    setHoveredItemId(null);
-                  }}
-                >
-                  <h3>
-                    <Link to={item.path}>{item.title}</Link>
-                  </h3>
-                  <p>{item.subtext}</p>
-                </GlanceTextBlock>
-              ))}
-            </GlanceContentColumn>
-          </GlanceContentArea>
-        </GlanceSectionContainer>
+        <OrchSection sectionId="programs">
+          <GlanceSectionContainer
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+          >
+            <GlanceContentArea>
+              <GlanceImageColumn>
+                <img src={activeImage} alt="" />
+              </GlanceImageColumn>
+              <GlanceContentColumn>
+                <GlanceHeader>At a Glance</GlanceHeader>
+                {glanceData.map((item) => (
+                  <GlanceTextBlock
+                    key={item.id}
+                    $isHovered={hoveredItemId === item.id}
+                    onMouseEnter={() => {
+                      setActiveImage(item.imageUrl);
+                      setHoveredItemId(item.id);
+                    }}
+                    onMouseLeave={() => {
+                      setActiveImage(glanceData[0].imageUrl);
+                      setHoveredItemId(null);
+                    }}
+                  >
+                    <h3>
+                      <Link to={item.path}>{item.title}</Link>
+                    </h3>
+                    <p>{item.subtext}</p>
+                  </GlanceTextBlock>
+                ))}
+              </GlanceContentColumn>
+            </GlanceContentArea>
+          </GlanceSectionContainer>
+        </OrchSection>
 
-        <DayLifeSection
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={sectionVariants}
-        >
-          <DayLifeTitle>The DMUN Difference</DayLifeTitle>
+        <OrchSection sectionId="day-in-life">
+          <DayLifeSection
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+          >
+            <DayLifeTitle>The DMUN Difference</DayLifeTitle>
           <Circles>
             <motion.div variants={itemVariants}> {/* Apply itemVariants to TiltedCard wrapper */}
               <TiltedCard 
@@ -956,12 +970,15 @@ const Home = () => {
             <p>Our online platform connects students across the globe in real time. With accessibility at its core, DMUN removes barriers and brings diplomacy to your screen.</p>
           </DayInLifeText>
         </DayLifeSection>
-        <NewsSection
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={sectionVariants}
-        >
+        </OrchSection>
+        
+        <OrchSection sectionId="newsroom">
+          <NewsSection
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+          >
           <NewsTitle><Link to="/newsroom" style={{color: 'black', textDecoration: 'none'}}>DMUN NEWS</Link></NewsTitle>
           <NewsGrid>
             {newsData.map(article => (
@@ -977,12 +994,15 @@ const Home = () => {
             ))}
           </NewsGrid>
         </NewsSection>
-        <EventsSection
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={sectionVariants}
-        >
+        </OrchSection>
+        
+        <OrchSection sectionId="upcoming-events">
+          <EventsSection
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={sectionVariants}
+          >
           <EventsTitle>Upcoming Events</EventsTitle>
           <EventsGrid>
             {eventsData.map((event, index) => (
@@ -1002,6 +1022,7 @@ const Home = () => {
             ))}
           </EventsGrid>
         </EventsSection>
+        </OrchSection>
       </ContentWrapper>
     </MainContentFrame>
   );
