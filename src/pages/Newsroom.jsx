@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
+import { enhancedSearch } from '../utils/searchEngine';
 
 const ABBOT_BLUE = '#44b8f3';
 const DARK_BLUE = '#002147';
@@ -91,6 +92,47 @@ const NewsDate = styled.p`
   opacity: 0.5;
   margin-top: auto;
   margin-bottom: 0;
+`;
+
+const RelevanceIndicator = styled.span`
+  font-family: var(--andover-font-sans);
+  font-size: 0.75rem;
+  color: ${ABBOT_BLUE};
+  background-color: rgba(68, 184, 243, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+`;
+
+const NoResultsContainer = styled.div`
+  text-align: center;
+  padding: 3rem 2rem;
+  color: ${DARK_BLUE};
+  opacity: 0.7;
+`;
+
+const NoResultsTitle = styled.h2`
+  font-family: var(--andover-font-serif);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+`;
+
+const NoResultsText = styled.p`
+  font-family: var(--andover-font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+`;
+
+const SearchStats = styled.p`
+  font-family: var(--andover-font-sans);
+  font-size: 0.9rem;
+  color: ${DARK_BLUE};
+  opacity: 0.6;
+  text-align: center;
+  margin-bottom: 2rem;
 `;
 
 const articles = [
@@ -397,19 +439,36 @@ const Newsroom = () => {
   const searchTerm = query.get('search')?.toLowerCase() || '';
 
   if (searchTerm) {
-    // Search all pages and articles
+    // Use enhanced search with semantic understanding and typo tolerance
     const allData = [...pageData, ...articleData];
-    const results = allData.filter(item => item.content.toLowerCase().includes(searchTerm));
+    const results = enhancedSearch(allData, searchTerm, 1); // minScore of 1
+    
     return (
       <NewsroomContainer>
         <PageTitle>Search Results for "{searchTerm}"</PageTitle>
+        <SearchStats>
+          Found {results.length} result{results.length !== 1 ? 's' : ''} 
+          {results.length > 0 && ' - sorted by relevance'}
+        </SearchStats>
         {results.length === 0 ? (
-          <p>No results found.</p>
+          <NoResultsContainer>
+            <NoResultsTitle>No results found</NoResultsTitle>
+            <NoResultsText>We couldn't find anything matching "{searchTerm}"</NoResultsText>
+            <NoResultsText>Try:</NoResultsText>
+            <NoResultsText>• Checking your spelling</NoResultsText>
+            <NoResultsText>• Using different or more general keywords</NoResultsText>
+            <NoResultsText>• Searching for related terms (e.g., "leader" instead of "leadership")</NoResultsText>
+          </NoResultsContainer>
         ) : (
           <NewsGrid>
             {results.map((item, idx) => (
               <NewsCard key={item.path + idx} to={item.path}>
                 <NewsContent>
+                  <RelevanceIndicator>
+                    {item.relevance >= 100 ? 'Highly Relevant' : 
+                     item.relevance >= 50 ? 'Very Relevant' : 
+                     item.relevance >= 20 ? 'Relevant' : 'Related'}
+                  </RelevanceIndicator>
                   <NewsTitle>{item.title}</NewsTitle>
                   <NewsSummary>{item.path}</NewsSummary>
                 </NewsContent>

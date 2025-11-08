@@ -155,16 +155,38 @@ const Search = styled.input`
   padding: 0.2rem 0.5rem;
   outline: none;
   width: 200px;
-  &::placeholder { color: currentColor; opacity: 0.8; }
+  transition: width 0.3s ease;
+
+  &:focus {
+    width: 250px;
+  }
+
+  &::placeholder { 
+    color: currentColor; 
+    opacity: 0.8; 
+  }
+  
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button,
   &::-webkit-search-results-button,
-  &::-webkit-search-results-decoration { display: none; }
-  &::-ms-clear { display: none; }
+  &::-webkit-search-results-decoration { 
+    display: none; 
+  }
+  
+  &::-ms-clear { 
+    display: none; 
+  }
 
   @media (max-width: 768px) {
     display: none;
   }
+`;
+
+const SearchHint = styled.span`
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-left: 0.5rem;
+  font-style: italic;
 `;
 
 const Header = ({ onMenuClick }) => {
@@ -177,6 +199,10 @@ const Header = ({ onMenuClick }) => {
   const handleSearchKeyDown = (e) => {
     if (e.key === 'Enter' && searchValue.trim()) {
       navigate(`/newsroom?search=${encodeURIComponent(searchValue.trim())}`);
+      setShowSearch(false); // Hide search after navigating
+    } else if (e.key === 'Escape') {
+      setShowSearch(false);
+      setSearchValue('');
     }
   };
 
@@ -271,13 +297,17 @@ const Header = ({ onMenuClick }) => {
 
         <Right>
           {showSearch && (
-            <Search
-              autoFocus
-              value={searchValue}
-              onChange={e => setSearchValue(e.target.value)}
-              onKeyDown={handleSearchKeyDown}
-              placeholder="Search..."
-            />
+            <>
+              <Search
+                autoFocus
+                value={searchValue}
+                onChange={e => setSearchValue(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
+                placeholder="Search anything..."
+                type="search"
+              />
+              <SearchHint>(Press Enter)</SearchHint>
+            </>
           )}
           <SearchToggle onClick={() => setShowSearch(s => !s)}>
             <SearchGlyph /> Search
