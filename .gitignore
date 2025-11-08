@@ -51,3 +51,4 @@ coverage
 Thumbs.db
 Desktop.ini
 package-lock.json
+/node_modules

@@ -1,6 +1,16 @@
 import styled from 'styled-components';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "./ui/navigation-menu"
+import { cn } from "@/lib/utils";
 
 const DARK_BLUE = '#002147';
 const ABBOT_BLUE = '#44b8f3';
@@ -60,29 +70,43 @@ const Logo = styled.img`
   object-fit: contain;
 `;
 
-const Navigation = styled.nav`
+const Navigation = styled.div`
   display: flex;
   align-items: center;
-  gap: 2.5rem;
   margin-left: auto;
   margin-right: 2rem;
 
   @media (max-width: 768px) {
     display: none;
   }
-`;
 
-const NavLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-  font-size: 1rem;
-  font-family: var(--andover-font-sans);
-  font-weight: 500;
-  cursor: pointer;
+  /* Override shadcn styles to match your design */
+  nav {
+    background: transparent !important;
+  }
 
-  &:hover {
-    text-decoration: underline;
-    color: inherit;
+  [data-radix-navigation-menu] {
+    background: transparent !important;
+  }
+
+  a {
+    color: inherit !important;
+    font-size: 1rem !important;
+    font-family: var(--andover-font-sans) !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    padding: 0.5rem 0 !important;
+
+    &:hover {
+      text-decoration: underline !important;
+      background: transparent !important;
+    }
+
+    &:focus {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
   }
 `;
 
@@ -93,6 +117,21 @@ const Right = styled.div`
 `;
 
 const SearchToggle = styled.button`
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: var(--andover-font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+
+  &:hover { text-decoration: underline; }
+`;
+
+const MenuButton = styled.button`
   background: none;
   border: none;
   color: inherit;
@@ -175,11 +214,45 @@ const Header = ({ onMenuClick }) => {
         </StyledLink>
         
         <Navigation>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/programs">Programs</NavLink>
-          <NavLink to="/advocacy">Advocacy</NavLink>
-          <NavLink to="/research">Research</NavLink>
-          <NavLink to="/newsroom">Newsroom</NavLink>
+          <NavigationMenu>
+            <NavigationMenuList className="gap-10">
+              <NavigationMenuItem>
+                <Link to="/about">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    About
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/programs">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Programs
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/advocacy">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Advocacy
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/research">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Research
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/newsroom">
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Newsroom
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
         </Navigation>
 
         <Right>
@@ -195,9 +268,9 @@ const Header = ({ onMenuClick }) => {
           <SearchToggle onClick={() => setShowSearch(s => !s)}>
             <SearchGlyph /> Search
           </SearchToggle>
-          <NavLink as="button" onClick={onMenuClick} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+          <MenuButton onClick={onMenuClick}>
             <MenuGlyph /> Menu
-          </NavLink>
+          </MenuButton>
         </Right>
       </HeaderBar>
     </>
