@@ -1,0 +1,42 @@
+{
+  "executiveTeam": [
+    {
+      "id": 1,
+      "name": "Jaewon Choi",
+      "role": "Executive Director",
+      "description": "Jaewon leads the organization with strategic vision, guiding its mission and overseeing all key initiatives. With extensive experience in youth advocacy and international relations, he ensures the Foundation achieves its goals of empowering young leaders worldwide.",
+      "image": "/jaewon-picture.jpg",
+      "linkedin": "https://www.linkedin.com/in/jaewonchoidmun/",
+      "email": "jaewon@dmunfoundation.org"
+    },
+    {
+      "id": 2,
+      "name": "Atharv Singh",
+      "role": "Deputy Executive Director",
+      "description": "Atharv supports overall operations, drives program development, and strengthens community engagement. His innovative approach to youth leadership and commitment to inclusive education has helped expand the Foundation's reach across multiple continents.",
+      "image": "/atharv-singh-professional.jpeg",
+      "linkedin": "https://www.linkedin.com/in/atharv-singh-b21159369/",
+      "email": "atharv@dmunfoundation.org"
+    },
+    {
+      "id": 3,
+      "name": "Lily Yang Liu",
+      "role": "Deputy Executive Director",
+      "description": "Lily oversees internal operations and strategic program coordination, ensuring seamless execution of the Foundation's initiatives. Her expertise in organizational management and passion for youth empowerment drive operational excellence across all programs.",
+      "image": "/lily-picture.png",
+      "linkedin": "https://www.linkedin.com/in/lily-yangliu-9b7471262/",
+      "email": "lily@dmunfoundation.org"
+    }
+  ],
+  "additionalStaff": [
+    {
+      "id": 4,
+      "name": "Add New Staff Member",
+      "role": "Position Title",
+      "description": "Add a description of the staff member's responsibilities and contributions to the Foundation.",
+      "image": "/placeholder-staff.jpg",
+      "linkedin": "https://www.linkedin.com/",
+      "email": "staff@dmunfoundation.org"
+    }
+  ]
+}

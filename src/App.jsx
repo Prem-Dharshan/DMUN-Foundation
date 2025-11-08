@@ -22,6 +22,7 @@ import TestPage from './pages/TestPage';
 import Membership from './pages/Membership';
 import Partner from './pages/Partner';
 import Publications from './pages/Publications';
+import ExecutiveLeadership from './pages/ExecutiveLeadership';
 
 // Executive Portal Imports
 import { ExecutiveAuthProvider } from './executives/context/ExecutiveAuthContext';
@@ -102,6 +103,7 @@ function App() {
                   <Route path="/volunteer" element={<Volunteer />} />
                   <Route path="/test" element={<TestPage />} />
                   <Route path="/partner" element={<Partner />} />
+                  <Route path="/executive-leadership" element={<ExecutiveLeadership />} />
                 </Routes>
               </main>
               <Footer />
